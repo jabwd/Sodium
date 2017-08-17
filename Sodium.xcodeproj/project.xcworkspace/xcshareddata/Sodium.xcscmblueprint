@@ -1,0 +1,44 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "AC7A41687E74809B8D620E56A0579B262929DE4F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "41D960F7EC3080187260512C45DF792CE6E221CC" : 9223372036854775807,
+    "CE9AF00AFB8A03609F4F7798690FDC63B7245B8D" : 9223372036854775807,
+    "81A28796384A028E6C2D47C039DB8B3E5DD6D0FC" : 9223372036854775807,
+    "AC7A41687E74809B8D620E56A0579B262929DE4F" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "E425DE40-5066-45E8-8BEE-2A4A5DBCFB56",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "41D960F7EC3080187260512C45DF792CE6E221CC" : "",
+    "CE9AF00AFB8A03609F4F7798690FDC63B7245B8D" : "..",
+    "81A28796384A028E6C2D47C039DB8B3E5DD6D0FC" : "Sodium\/libsodium\/",
+    "AC7A41687E74809B8D620E56A0579B262929DE4F" : "Sodium\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Sodium",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Sodium.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:jabwd\/AirwaveKit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "41D960F7EC3080187260512C45DF792CE6E221CC"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jedisct1\/libsodium.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "81A28796384A028E6C2D47C039DB8B3E5DD6D0FC"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jabwd\/Sodium.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AC7A41687E74809B8D620E56A0579B262929DE4F"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jabwd\/MDL-Chat-iOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CE9AF00AFB8A03609F4F7798690FDC63B7245B8D"
+    }
+  ]
+}

@@ -19,7 +19,6 @@ FOUNDATION_EXPORT const unsigned char SodiumVersionString[];
 
 #include "core.h"
 #include "crypto_aead_aes256gcm.h"
-#include "crypto_aead_chacha20poly1305.h"
 #include "crypto_auth.h"
 #include "crypto_auth_hmacsha256.h"
 #include "crypto_auth_hmacsha512.h"
