@@ -19,6 +19,8 @@ public extension Data {
 	}
 	
 	public static func randomBytes(_ size: Int) -> [UInt8] {
+		// This can technically be replaced with SecRandom, but I wanted to reduce
+		// the amount of frameworks this code relies on. 
 		var bytes: [UInt8] = [UInt8](repeating: 0, count: size)
 		randombytes_buf(&bytes, size)
 		return bytes

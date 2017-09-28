@@ -9,7 +9,9 @@ import XCTest
 import Sodium
 
 class SodiumTests: XCTestCase {
-    
+	
+	let password = "Correct Horse Battery Staple!"
+	
     override func setUp() {
         super.setUp()
     }
@@ -17,6 +19,24 @@ class SodiumTests: XCTestCase {
     override func tearDown() {
         super.tearDown()
     }
+	
+	func testPasswordHash() {
+		guard let hash = Hash.createPasswordHash(password) else {
+			XCTAssert(false)
+			return
+		}
+		print("Password hash: \(hash)")
+		
+		XCTAssert(Hash.verifyPassword(password, hash: hash))
+	}
+	
+	func testPasswordPerformance() {
+		var hash: String = ""
+		self.measure {
+			hash = Hash.createPasswordHash(password) ?? ""
+			let _ = Hash.verifyPassword(password, hash: hash)
+		}
+	}
     
     func testBlake2Hash() {
 		let key  = Data.random(Hash.keySize)
