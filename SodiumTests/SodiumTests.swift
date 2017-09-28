@@ -22,6 +22,8 @@ class SodiumTests: XCTestCase {
 		let key  = Data.random(Hash.keySize)
 		let key2 = Data.random(Hash.keySize)
 		
+		XCTAssert(key != key2)
+		
 		let hash  = Hash.blake(key2, key: key)
 		let hash2 = Hash.blake(key2, key: key)
 		let hash3 = Hash.blake(key, key: key2)
