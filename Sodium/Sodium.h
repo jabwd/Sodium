@@ -62,6 +62,16 @@ FOUNDATION_EXPORT const unsigned char SodiumVersionString[];
 #ifdef __native_client__
 # include "randombytes_nativeclient.h"
 #endif
+#include "crypto_sign_edwards25519sha512batch.h"
+#include "crypto_stream_xchacha20.h"
+#include "randombytes_nativeclient.h"
+#include "crypto_kdf_blake2b.h"
+#include "crypto_aead_xchacha20poly1305.h"
+#include "crypto_box_curve25519xchacha20poly1305.h"
+#include "crypto_kdf.h"
+#include "crypto_kx.h"
+#include "crypto_secretbox_xchacha20poly1305.h"
+#include "crypto_secretstream_xchacha20poly1305.h"
 #include "randombytes_salsa20_random.h"
 #include "randombytes_sysrandom.h"
 #include "runtime.h"
