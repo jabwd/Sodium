@@ -1,6 +1,20 @@
 # Sodium
 libsodium framework for iOS with a basic Swift API layer ( more libsodium coverage will follow in future updates ).
 
+### SecretBox
+
+```
+let box = SecretBox() // automatically generates the key for you
+
+or:
+
+// Returns nil if the key is not of sufficient size
+let box = SecretBox(keyBytes)?
+
+box.encrypt("Blabla")
+box.decrypt(message)?
+```
+
 ### Password hashing
 
 libsodium password hashing uses the memory intensive `argon2` algorithm.
