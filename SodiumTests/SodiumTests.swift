@@ -59,5 +59,16 @@ class SodiumTests: XCTestCase {
 			}
         }
     }
+	
+	func testSecretBox() {
+		let box = SecretBox()
+		
+		let message = "heontsuhoanshuaenohuesnoahueaons"
+		
+		let cipher = box.encrypt(message)
+		
+		let decrypted = box.decrypt(cipher) ?? ""
+		XCTAssert(decrypted == message)
+	}
     
 }

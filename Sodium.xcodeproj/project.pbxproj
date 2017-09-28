@@ -247,6 +247,8 @@
 		36AE23AE1F7D147600487FFC /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AE23AD1F7D147600487FFC /* DataExtensions.swift */; };
 		36AE23B61F7D156800487FFC /* SodiumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AE23B51F7D156800487FFC /* SodiumTests.swift */; };
 		36AE23B81F7D156800487FFC /* Sodium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 361797F71F45B1D700F23298 /* Sodium.framework */; };
+		36AE23BF1F7D31CA00487FFC /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AE23BE1F7D31CA00487FFC /* Box.swift */; };
+		36AE23C11F7D31D100487FFC /* SecretBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AE23C01F7D31D100487FFC /* SecretBox.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -503,6 +505,8 @@
 		36AE23B31F7D156800487FFC /* SodiumTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SodiumTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		36AE23B51F7D156800487FFC /* SodiumTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SodiumTests.swift; sourceTree = "<group>"; };
 		36AE23B71F7D156800487FFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		36AE23BE1F7D31CA00487FFC /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
+		36AE23C01F7D31D100487FFC /* SecretBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretBox.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1476,6 +1480,8 @@
 			children = (
 				36AE23AB1F7D0FB400487FFC /* Hash.swift */,
 				36AE23AD1F7D147600487FFC /* DataExtensions.swift */,
+				36AE23BE1F7D31CA00487FFC /* Box.swift */,
+				36AE23C01F7D31D100487FFC /* SecretBox.swift */,
 			);
 			name = SwiftAPI;
 			sourceTree = "<group>";
@@ -1777,6 +1783,7 @@
 				361799391F45B27300F23298 /* blake2b-ref.c in Sources */,
 				3617998E1F45B27300F23298 /* obsolete.c in Sources */,
 				361799A41F45B27300F23298 /* chacha20_ref.c in Sources */,
+				36AE23BF1F7D31CA00487FFC /* Box.swift in Sources */,
 				3617993C1F45B27300F23298 /* crypto_hash.c in Sources */,
 				361799561F45B27300F23298 /* blake2b-long.c in Sources */,
 				361799D21F45B28100F23298 /* core.c in Sources */,
@@ -1793,6 +1800,7 @@
 				3617993D1F45B27300F23298 /* hash_sha256_cp.c in Sources */,
 				3617996B1F45B27300F23298 /* consts.S in Sources */,
 				361799311F45B27300F23298 /* blake2b-compress-ref.c in Sources */,
+				36AE23C11F7D31D100487FFC /* SecretBox.swift in Sources */,
 				3617998B1F45B27300F23298 /* crypto_sign.c in Sources */,
 				361799851F45B27300F23298 /* crypto_shorthash.c in Sources */,
 				361799631F45B27300F23298 /* pwhash_scryptsalsa208sha256.c in Sources */,
