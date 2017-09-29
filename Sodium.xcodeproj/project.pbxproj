@@ -249,6 +249,7 @@
 		36AE23B81F7D156800487FFC /* Sodium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 361797F71F45B1D700F23298 /* Sodium.framework */; };
 		36AE23BF1F7D31CA00487FFC /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AE23BE1F7D31CA00487FFC /* Box.swift */; };
 		36AE23C11F7D31D100487FFC /* SecretBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AE23C01F7D31D100487FFC /* SecretBox.swift */; };
+		36D363131F7E7EF6001207EC /* KeyPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D363121F7E7EF6001207EC /* KeyPair.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -507,6 +508,7 @@
 		36AE23B71F7D156800487FFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		36AE23BE1F7D31CA00487FFC /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
 		36AE23C01F7D31D100487FFC /* SecretBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretBox.swift; sourceTree = "<group>"; };
+		36D363121F7E7EF6001207EC /* KeyPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPair.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1482,6 +1484,7 @@
 				36AE23AD1F7D147600487FFC /* DataExtensions.swift */,
 				36AE23BE1F7D31CA00487FFC /* Box.swift */,
 				36AE23C01F7D31D100487FFC /* SecretBox.swift */,
+				36D363121F7E7EF6001207EC /* KeyPair.swift */,
 			);
 			name = SwiftAPI;
 			sourceTree = "<group>";
@@ -1775,6 +1778,7 @@
 				361799831F45B27300F23298 /* secretbox_xsalsa20poly1305.c in Sources */,
 				361799741F45B27300F23298 /* fe51_nsquare.S in Sources */,
 				361799931F45B27300F23298 /* beforenm_aes128ctr.c in Sources */,
+				36D363131F7E7EF6001207EC /* KeyPair.swift in Sources */,
 				3617992A1F45B27300F23298 /* core_hsalsa20.c in Sources */,
 				361799961F45B27300F23298 /* consts_aes128ctr.c in Sources */,
 				361799D51F45B28100F23298 /* version.c in Sources */,

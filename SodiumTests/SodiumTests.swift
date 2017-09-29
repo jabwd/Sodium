@@ -63,12 +63,22 @@ class SodiumTests: XCTestCase {
 	func testSecretBox() {
 		let box = SecretBox()
 		
-		let message = "heontsuhoanshuaenohuesnoahueaons"
+		let message = "Hello World!"
 		
 		let cipher = box.encrypt(message)
 		
 		let decrypted = box.decrypt(cipher) ?? ""
+		print("Decrypted: \(decrypted) \(message)")
 		XCTAssert(decrypted == message)
 	}
-    
+	
+	func testSignature() {
+		let keypair = SigningKeyPair()
+		
+		let message = "1231231123"
+		let signedMessage = keypair.sign(message: message.data(using: .utf8)!)
+		
+		let unsignedMessage = String(data: keypair.verifySignature(signedMessage) ?? Data(), encoding: .utf8) ?? ""
+		XCTAssert(unsignedMessage == message)
+	}
 }
