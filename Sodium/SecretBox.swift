@@ -66,6 +66,6 @@ public class SecretBox {
 			return nil
 		}
 		
-		return String(cString: &output)
+		return String(bytes: output, encoding: .utf8)
 	}
 }
