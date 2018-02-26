@@ -22,12 +22,16 @@ public class Box {
 		secretKey = newSecretKey
 	}
 	
-	public init(publicKey pKey: [UInt8]) throws {
+	public init(publicKey pKey: [UInt8], secretKey sKey: [UInt8]? = nil) throws {
 		guard pKey.count == KeyPair.publicKeySize else {
 			throw SodiumError.invalidPublicKey
 		}
 		publicKey = pKey
-		secretKey = []
+		if let sKeyUnwrapped = sKey {
+			secretKey = sKeyUnwrapped
+		} else {
+			secretKey = []
+		}
 	}
 	
 	// MARK: -
