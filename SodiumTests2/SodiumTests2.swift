@@ -1,24 +1,24 @@
 //
-//  SodiumTests.swift
-//  SodiumTests
+//  SodiumTests2.swift
+//  SodiumTests2
 //
-//  Created by Antwan van Houdt on 28/09/2017.
+//  Created by Antwan van Houdt on 26/02/2018.
 //
 
 import XCTest
 import Sodium
 
-class SodiumTests: XCTestCase {
+class SodiumTests2: XCTestCase {
 	
 	let password = "Correct Horse Battery Staple!"
 	
-    override func setUp() {
-        super.setUp()
-    }
-    
-    override func tearDown() {
-        super.tearDown()
-    }
+	override func setUp() {
+		super.setUp()
+	}
+	
+	override func tearDown() {
+		super.tearDown()
+	}
 	
 	func testPasswordHash() {
 		guard let hash = Hash.createPasswordHash(password) else {
@@ -37,8 +37,8 @@ class SodiumTests: XCTestCase {
 			let _ = Hash.verifyPassword(password, hash: hash)
 		}
 	}
-    
-    func testBlake2Hash() {
+	
+	func testBlake2Hash() {
 		let key  = Data.random(Hash.keySize)
 		let key2 = Data.random(Hash.keySize)
 		
@@ -50,15 +50,15 @@ class SodiumTests: XCTestCase {
 		
 		XCTAssert(hash == hash2)
 		XCTAssert(hash3 != hash2)
-    }
-    
-    func testRandomBytesPerformance() {
-        self.measure {
+	}
+	
+	func testRandomBytesPerformance() {
+		self.measure {
 			for _ in 0..<1000 {
 				let _ = Data.random(Hash.keySize)
 			}
-        }
-    }
+		}
+	}
 	
 	func testSecretBox() {
 		let box = SecretBox()
@@ -80,5 +80,21 @@ class SodiumTests: XCTestCase {
 		
 		let unsignedMessage = String(data: keypair.verifySignature(signedMessage) ?? Data(), encoding: .utf8) ?? ""
 		XCTAssert(unsignedMessage == message)
+	}
+	
+	func testBox() {
+		let localBox = Box()
+		let remoteBox = Box()
+		
+		let message = "Correct Horse Battery Staple!"
+		let messageBytes = Array(message.utf8)
+		
+		let encrypted = try? remoteBox.encrypt(message: messageBytes, localBox: localBox)
+		XCTAssert(encrypted != nil)
+		let decrypted = try? localBox.decrypt(message: encrypted!, remoteBox: remoteBox)
+		XCTAssert(decrypted != nil)
+		
+		let decryptedMessage = String(bytes: decrypted!, encoding: .utf8)
+		XCTAssert(decryptedMessage == "Correct Horse Battery Staple!")
 	}
 }
