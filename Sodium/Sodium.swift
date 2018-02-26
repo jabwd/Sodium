@@ -6,7 +6,7 @@
 //
 
 public class Sodium {
-	static func initialize() {
+	public static func initialize() {
 		let _ = sodium_init()
 	}
 }
