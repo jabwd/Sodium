@@ -27,7 +27,7 @@ On my system this tested at an average of around `1 second`.
 ```
 let passwordHash = Hash.createPasswordHash("Correct Horse Battery Staple!")
 
-let result = Hash.verifyPassword(passwordHash)
+let result = Hash.verifyPassword(password, passwordHash)
 ```
 
 ### Blake2 hashing
