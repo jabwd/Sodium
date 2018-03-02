@@ -33,6 +33,38 @@ public class SecretBox {
 		self.key = Data.random(SecretBox.keySize)
 	}
 	
+	public func encrypt(bytes: [UInt8]) -> [UInt8] {
+		let nonce:      [UInt8] = Data.randomBytes(SecretBox.nonceSize)
+		var cipherText: [UInt8] = [UInt8](repeating: 0, count: (SecretBox.macSize+bytes.count))
+		let keyBytes:   [UInt8] = key.withUnsafeBytes {
+			[UInt8](UnsafeBufferPointer(start: $0, count: key.count))
+		}
+		crypto_secretbox_easy(&cipherText, bytes, UInt64(bytes.count), nonce, keyBytes)
+		
+		// Generate the nonce + cipherText payload
+		return nonce + cipherText
+	}
+	
+	public func decrypt(bytes: [UInt8]) -> [UInt8]? {
+		let keyBytes = key.withUnsafeBytes {
+			[UInt8](UnsafeBufferPointer(start: $0, count: key.count))
+		}
+		
+		// Take apart the nonce from the cipherText
+		assert(bytes.count>=SecretBox.nonceSize+SecretBox.macSize)
+		let nonce = Array(bytes[0..<SecretBox.nonceSize])
+		assert(nonce.count == SecretBox.nonceSize)
+		let cipher = Array(bytes[SecretBox.nonceSize..<bytes.count])
+		
+		var output: [UInt8] = [UInt8](repeating: 0, count: cipher.count-SecretBox.macSize)
+		guard crypto_secretbox_open_easy(&output, cipher, UInt64(cipher.count), nonce, keyBytes) == 0 else {
+			print("[\(type(of: self))] Decrypt failed")
+			return nil
+		}
+		
+		return output
+	}
+	
 	public func encrypt(_ message: String) -> Data {
 		let nonce:      [UInt8] = Data.randomBytes(SecretBox.nonceSize)
 		var cipherText: [UInt8] = [UInt8](repeating: 0, count: (SecretBox.macSize+message.count))
