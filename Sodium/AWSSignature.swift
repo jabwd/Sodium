@@ -36,13 +36,13 @@ public struct AWSSignature {
 	
 	public func signRequest(_ request: URLRequest) -> URLRequest? {
 		var signedRequest = request
-		//let date = iso8601()
-		let date = (full: "20180807T162003Z", short: "20180807")
+		let date = iso8601()
 		
 		guard let payload = signedRequest.httpBody else { return nil }
 		guard let url = signedRequest.url else { return nil }
 		guard let host = url.host else { return nil }
 		
+		signedRequest.addValue("binary/octet-stream", forHTTPHeaderField: "Content-Type")
 		signedRequest.addValue(host, forHTTPHeaderField: "Host")
 		signedRequest.addValue(date.full, forHTTPHeaderField: "X-Amz-Date")
 		guard let headers = signedRequest.allHTTPHeaderFields,
@@ -61,9 +61,9 @@ public struct AWSSignature {
 			signedHeaders,
 			bodyHash.toHexString()
 		].joined(separator: "\n")
-		//guard let cRequestData = canonicalRequestString.data(using: .utf8) else { return nil }
 		let canonicalRequestHashBytes = [UInt8](canonicalRequestString.utf8).sha256
-		print("Canonical: \n=========================================\n\(canonicalRequestString)\n===================================")
+		signedRequest.setValue(bodyHash.toHexString(), forHTTPHeaderField: "x-amz-content-sha256")
+		
 		let credential = [date.short, region, "s3", "aws4_request"].joined(separator: "/")
 		
 		let stringToSign = [
@@ -72,13 +72,13 @@ public struct AWSSignature {
 			credential,
 			canonicalRequestHashBytes.toHexString()
 		].joined(separator: "\n")
-		print("String to sign: \n============================================\n\(stringToSign)\n========================================")
+		
 		guard let signature = signStringToSign(stringToSign, shortDateString: date.short) else {
 			return nil
 		}
 		
-		let authorization = "AWS4-HMAC-SHA256 Credential=" + accessKey + "/" + credential + ", SignedHeaders=" + signedHeaders + ", Signature=" + signature
-		print("Authorization: \(authorization)")
+		let authorization = "AWS4-HMAC-SHA256 Credential=\(accessKey)/\(credential), SignedHeaders=\(signedHeaders), Signature=\(signature)"
+		
 		signedRequest.addValue(authorization, forHTTPHeaderField: "Authorization")
 		
 		return signedRequest
@@ -86,6 +86,7 @@ public struct AWSSignature {
 	
 	private func signStringToSign(_ stringToSign: String, shortDateString: String) -> String? {
 		let startingKey = "AWS4\(secretKey)"
+		
 		let startingKeyBytes = [UInt8](startingKey.utf8)
 		
 		let data = region.data(using: .utf8)!
