@@ -92,12 +92,15 @@ public class Hash {
 		var localBytes: [UInt8] = bytes
 		var state = crypto_auth_hmacsha256_state()
 		
+		print("Key size: \(localKey.count)")
 		// We perform a multi-part SHA2 operation because the one-shot API
 		// does not allow for variable-size key sizes
 		crypto_auth_hmacsha256_init(&state, &localKey, localKey.count)
 		crypto_auth_hmacsha256_update(&state, &localBytes, UInt64(localBytes.count))
 		crypto_auth_hmacsha256_final(&state, &hash)
-		
+		let data = Data(bytes: bytes)
+		print("Hashing: \(String(data: data, encoding: .utf8) ?? "")")
+		print("Intermediate: \(hash.toHexString())")
 		return hash
 	}
 	

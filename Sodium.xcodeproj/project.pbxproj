@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		361797FC1F45B1D700F23298 /* Sodium.h in Headers */ = {isa = PBXBuildFile; fileRef = 361797FA1F45B1D700F23298 /* Sodium.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		367B24332119E880008D8DF5 /* AWSSignature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367B24322119E880008D8DF5 /* AWSSignature.swift */; };
+		367B24352119ED32008D8DF5 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367B24342119ED32008D8DF5 /* Array+Extension.swift */; };
 		368890002044249A00A20D90 /* crypto_stream_salsa208.h in Headers */ = {isa = PBXBuildFile; fileRef = 36888FC42044249400A20D90 /* crypto_stream_salsa208.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		368890012044249A00A20D90 /* crypto_core_hsalsa20.h in Headers */ = {isa = PBXBuildFile; fileRef = 36888FC52044249400A20D90 /* crypto_core_hsalsa20.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		368890022044249A00A20D90 /* crypto_onetimeauth.h in Headers */ = {isa = PBXBuildFile; fileRef = 36888FC62044249400A20D90 /* crypto_onetimeauth.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -94,6 +96,8 @@
 		361797F71F45B1D700F23298 /* Sodium.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Sodium.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		361797FA1F45B1D700F23298 /* Sodium.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sodium.h; sourceTree = "<group>"; };
 		361797FB1F45B1D700F23298 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		367B24322119E880008D8DF5 /* AWSSignature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSSignature.swift; sourceTree = "<group>"; };
+		367B24342119ED32008D8DF5 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		36888FC42044249400A20D90 /* crypto_stream_salsa208.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = crypto_stream_salsa208.h; path = Headers/crypto_stream_salsa208.h; sourceTree = "<group>"; };
 		36888FC52044249400A20D90 /* crypto_core_hsalsa20.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = crypto_core_hsalsa20.h; path = Headers/crypto_core_hsalsa20.h; sourceTree = "<group>"; };
 		36888FC62044249400A20D90 /* crypto_onetimeauth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = crypto_onetimeauth.h; path = Headers/crypto_onetimeauth.h; sourceTree = "<group>"; };
@@ -297,6 +301,8 @@
 				36D363121F7E7EF6001207EC /* KeyPair.swift */,
 				36D5294B2044284D009DFBA8 /* Sodium.swift */,
 				36D5294D20442960009DFBA8 /* Error.swift */,
+				367B24322119E880008D8DF5 /* AWSSignature.swift */,
+				367B24342119ED32008D8DF5 /* Array+Extension.swift */,
 			);
 			name = SwiftAPI;
 			sourceTree = "<group>";
@@ -490,7 +496,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				36D363131F7E7EF6001207EC /* KeyPair.swift in Sources */,
+				367B24352119ED32008D8DF5 /* Array+Extension.swift in Sources */,
 				36AE23AC1F7D0FB400487FFC /* Hash.swift in Sources */,
+				367B24332119E880008D8DF5 /* AWSSignature.swift in Sources */,
 				36AE23BF1F7D31CA00487FFC /* Box.swift in Sources */,
 				36AE23C11F7D31D100487FFC /* SecretBox.swift in Sources */,
 				36D5294C2044284D009DFBA8 /* Sodium.swift in Sources */,
