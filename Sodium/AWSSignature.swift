@@ -11,6 +11,7 @@ public struct AWSSignature {
 	public let secretKey: String
 	public let accessKey: String
 	public let region: String
+	public let service: String
 	
 	private let iso8601Formatter: DateFormatter = {
 		let formatter = DateFormatter()
@@ -28,10 +29,11 @@ public struct AWSSignature {
 		return (full: date, short: String(shortDate))
 	}
 	
-	public init(request: URLRequest, secretKey: String, accessKey: String, region: String) {
+	public init(request: URLRequest, service: String, secretKey: String, accessKey: String, region: String) {
 		self.secretKey = secretKey
 		self.accessKey = accessKey
 		self.region = region
+		self.service = service
 	}
 	
 	public func signRequest(_ request: URLRequest) -> URLRequest? {
@@ -64,7 +66,7 @@ public struct AWSSignature {
 		let canonicalRequestHashBytes = [UInt8](canonicalRequestString.utf8).sha256
 		signedRequest.setValue(bodyHash.toHexString(), forHTTPHeaderField: "x-amz-content-sha256")
 		
-		let credential = [date.short, region, "s3", "aws4_request"].joined(separator: "/")
+		let credential = [date.short, region, service, "aws4_request"].joined(separator: "/")
 		
 		let stringToSign = [
 			"AWS4-HMAC-SHA256",
@@ -94,7 +96,7 @@ public struct AWSSignature {
 		
 		let keyDate = Hash.hmacSHA256([UInt8](shortDateString.utf8), key: startingKeyBytes)
 		let keyRegion = Hash.hmacSHA256([UInt8](data), key: keyDate)
-		let keyService = Hash.hmacSHA256([UInt8]("s3".utf8), key: keyRegion)
+		let keyService = Hash.hmacSHA256([UInt8](service.utf8), key: keyRegion)
 		let keySigning = Hash.hmacSHA256([UInt8]("aws4_request".utf8), key: keyService)
 		
 		let signature = Hash.hmacSHA256([UInt8](stringToSign.utf8), key: keySigning)
