@@ -294,15 +294,15 @@
 		36AE23AA1F7D0FA300487FFC /* SwiftAPI */ = {
 			isa = PBXGroup;
 			children = (
-				36AE23AB1F7D0FB400487FFC /* Hash.swift */,
-				36AE23AD1F7D147600487FFC /* DataExtensions.swift */,
-				36AE23BE1F7D31CA00487FFC /* Box.swift */,
-				36AE23C01F7D31D100487FFC /* SecretBox.swift */,
-				36D363121F7E7EF6001207EC /* KeyPair.swift */,
-				36D5294B2044284D009DFBA8 /* Sodium.swift */,
-				36D5294D20442960009DFBA8 /* Error.swift */,
-				367B24322119E880008D8DF5 /* AWSSignature.swift */,
 				367B24342119ED32008D8DF5 /* Array+Extension.swift */,
+				367B24322119E880008D8DF5 /* AWSSignature.swift */,
+				36AE23BE1F7D31CA00487FFC /* Box.swift */,
+				36AE23AD1F7D147600487FFC /* DataExtensions.swift */,
+				36D5294D20442960009DFBA8 /* Error.swift */,
+				36AE23AB1F7D0FB400487FFC /* Hash.swift */,
+				36D363121F7E7EF6001207EC /* KeyPair.swift */,
+				36AE23C01F7D31D100487FFC /* SecretBox.swift */,
+				36D5294B2044284D009DFBA8 /* Sodium.swift */,
 			);
 			name = SwiftAPI;
 			sourceTree = "<group>";
