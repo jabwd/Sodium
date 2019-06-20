@@ -34,7 +34,7 @@ class SodiumTests2: XCTestCase {
 		var hash: String = ""
 		self.measure {
 			hash = Hash.createPasswordHash(password) ?? ""
-			let _ = Hash.verifyPassword(password, hash: hash)
+			_ = Hash.verifyPassword(password, hash: hash)
 		}
 	}
 	
@@ -55,7 +55,7 @@ class SodiumTests2: XCTestCase {
 	func testRandomBytesPerformance() {
 		self.measure {
 			for _ in 0..<1000 {
-				let _ = Data.random(Hash.keySize)
+				_ = Data.random(Hash.keySize)
 			}
 		}
 	}
@@ -67,19 +67,27 @@ class SodiumTests2: XCTestCase {
 		
 		let cipher = box.encrypt(message)
 		
-		let decrypted = box.decrypt(cipher) ?? ""
-		print("Decrypted: \(decrypted) \(message)")
-		XCTAssert(decrypted == message)
+		do {
+			let decrypted = try box.decrypt(bytes: cipher)
+			let str = String(bytes: decrypted, encoding: .utf8)
+			XCTAssert(str == message)
+		} catch{
+			XCTAssert(false)
+		}
 	}
 	
 	func testSignature() {
 		let keypair = SigningKeyPair()
 		
 		let message = "1231231123"
-		let signedMessage = keypair.sign(message: message.data(using: .utf8)!)
-		
-		let unsignedMessage = String(data: keypair.verifySignature(signedMessage) ?? Data(), encoding: .utf8) ?? ""
-		XCTAssert(unsignedMessage == message)
+		let signedMessage = keypair.sign(message: [UInt8](message.utf8))
+		do {
+			let unsignedMessage = try keypair.verifySignature(signedMessage)
+			let str = String(bytes: unsignedMessage, encoding: .utf8)
+			XCTAssert(str == message)
+		} catch {
+			XCTAssert(false)
+		}
 	}
 	
 	func testBox() {

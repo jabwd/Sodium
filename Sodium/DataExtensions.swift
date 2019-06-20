@@ -8,17 +8,17 @@
 import Foundation
 
 public extension Data {
-	public func bytes() -> [UInt8] {
-		return self.withUnsafeBytes {
-			[UInt8](UnsafeBufferPointer(start: $0, count: self.count))
+	func bytes() -> [UInt8] {
+		return withUnsafeBytes { (ptr: UnsafeRawBufferPointer) -> [UInt8] in
+			[UInt8](ptr)
 		}
 	}
 	
-	public static func random(_ size: Int) -> Data {
-		return Data(bytes: randomBytes(size))
+	static func random(_ size: Int) -> Data {
+		return Data(randomBytes(size))
 	}
 	
-	public static func randomBytes(_ size: Int) -> [UInt8] {
+	static func randomBytes(_ size: Int) -> [UInt8] {
 		// This can technically be replaced with SecRandom, but I wanted to reduce
 		// the amount of frameworks this code relies on. 
 		var bytes: [UInt8] = [UInt8](repeating: 0, count: size)

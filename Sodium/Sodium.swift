@@ -7,6 +7,6 @@
 
 public class Sodium {
 	public static func initialize() {
-		let _ = sodium_init()
+		_ = sodium_init()
 	}
 }

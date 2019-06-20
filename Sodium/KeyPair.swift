@@ -14,24 +14,21 @@ public struct KeyPair {
 	public let publicKey: [UInt8]
 	public let secretKey: [UInt8]
 	
-	init?(_ publicKey: Data, secretKey: Data) {
-		guard publicKey.count == KeyPair.publicKeySize, secretKey.count == KeyPair.secretKeySize else {
+	init?(_ publicKey: [UInt8], secretKey: [UInt8]) {
+		guard publicKey.count == KeyPair.publicKeySize,
+			secretKey.count == KeyPair.secretKeySize else {
 			return nil
 		}
-		self.publicKey = publicKey.withUnsafeBytes {
-			[UInt8](UnsafeBufferPointer(start: $0, count: publicKey.count))
-		}
-		self.secretKey = secretKey.withUnsafeBytes {
-			[UInt8](UnsafeBufferPointer(start: $0, count: secretKey.count))
-		}
+		self.publicKey = publicKey
+		self.secretKey = secretKey
 	}
 	
 	init() {
 		var pub = [UInt8](repeating: 0, count: KeyPair.publicKeySize)
 		var sec = [UInt8](repeating: 0, count: KeyPair.secretKeySize)
-		
+
 		crypto_box_keypair(&pub, &sec)
-		
+
 		publicKey = pub
 		secretKey = sec
 	}
@@ -44,50 +41,63 @@ public struct SigningKeyPair {
 	
 	public let secretKey: [UInt8]
 	public let publicKey: [UInt8]
-	
-	public init?(_ publicKey: Data, secretKey: Data) {
-		guard secretKey.count == SigningKeyPair.secretKeySize, publicKey.count == SigningKeyPair.secretKeySize else {
-			return nil
+
+	/// Initializes using an existing keypair
+	public init(_ publicKey: [UInt8], secretKey: [UInt8]) throws {
+		guard secretKey.count == SigningKeyPair.secretKeySize else {
+			throw SodiumError.invalidSecretKey
 		}
-		
-		self.publicKey = publicKey.withUnsafeBytes {
-			[UInt8](UnsafeBufferPointer(start: $0, count: publicKey.count))
+		guard publicKey.count == SigningKeyPair.publicKeySize else {
+			throw SodiumError.invalidPublicKey
 		}
-		self.secretKey = secretKey.withUnsafeBytes {
-			[UInt8](UnsafeBufferPointer(start: $0, count: secretKey.count))
-		}
+		self.publicKey = publicKey
+		self.secretKey = secretKey
 	}
-	
+
+	/// Initializes an instance with a newly generated keypair
 	public init() {
 		var sec = [UInt8](repeating: 0, count: SigningKeyPair.secretKeySize)
 		var pub = [UInt8](repeating: 0, count: SigningKeyPair.publicKeySize)
-		
+
 		crypto_sign_keypair(&pub, &sec)
-		
+
 		self.publicKey = pub
 		self.secretKey = sec
 	}
-	
-	public func sign(message: Data) -> Data {
-		let messageBytes: [UInt8] = message.withUnsafeBytes {
-			[UInt8](UnsafeBufferPointer(start: $0, count: message.count))
-		}
-		var signedMessage: [UInt8] = [UInt8](repeating: 0, count: SigningKeyPair.signatureSize+messageBytes.count)
+
+	/// Attaches a signature to the given bytebuffer that can later be verified
+	/// - Parameter message: The message to sign
+	/// - Returns: Payload containing the message and a signature
+	public func sign(message: [UInt8]) -> [UInt8] {
+		var signedMessage: [UInt8] = [UInt8](repeating: 0, count: SigningKeyPair.signatureSize+message.count)
 		var signedMessageLength: UInt64 = 0
-		crypto_sign(&signedMessage, &signedMessageLength, messageBytes, UInt64(messageBytes.count), secretKey)
-		return Data(bytes: signedMessage)
+		crypto_sign(
+			&signedMessage,
+			&signedMessageLength,
+			message,
+			UInt64(message.count),
+			secretKey
+		)
+		return signedMessage
 	}
-	
-	public func verifySignature(_ signedMessage: Data) -> Data? {
-		let signedMessageBytes: [UInt8] = signedMessage.withUnsafeBytes {
-			[UInt8](UnsafeBufferPointer(start: $0, count: signedMessage.count))
-		}
+
+	/// Verifies a payload and returns the message without the signature
+	/// - Parameter signedMessage: the signed payload to verify
+	/// - Throws: SodiumError.invalidSignature when the signature or message is incorrect
+	/// - Returns: The message with the signature removed from the payload
+	public func verifySignature(_ signedMessage: [UInt8]) throws -> [UInt8] {
 		var unsigned: [UInt8] = [UInt8](repeating: 0, count: signedMessage.count-SigningKeyPair.signatureSize)
 		var unsignedLength: UInt64 = 0
-		let result = crypto_sign_open(&unsigned, &unsignedLength, signedMessageBytes, UInt64(signedMessageBytes.count), publicKey)
+		let result = crypto_sign_open(
+			&unsigned,
+			&unsignedLength,
+			signedMessage,
+			UInt64(signedMessage.count),
+			publicKey
+		)
 		guard result == 0 else {
-			return nil
+			throw SodiumError.invalidSignature
 		}
-		return Data(bytes: unsigned)
+		return unsigned
 	}
 }

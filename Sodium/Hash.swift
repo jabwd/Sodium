@@ -32,14 +32,14 @@ public class Hash {
 	public static func blake(_ input: Data, key: Data) -> Data {
 		var output: [UInt8] = [UInt8](repeating: 0, count: outputSize)
 		
-		let keyBytes = key.withUnsafeBytes {
-			[UInt8](UnsafeBufferPointer(start: $0, count: key.count))
+		let keyBytes = key.withUnsafeBytes { (ptr: UnsafeRawBufferPointer) in
+			[UInt8](ptr)
 		}
-		let inputBytes = input.withUnsafeBytes {
-			[UInt8](UnsafeBufferPointer(start: $0, count: input.count))
+		let inputBytes = input.withUnsafeBytes { (ptr: UnsafeRawBufferPointer) in
+			[UInt8](ptr)
 		}
 		crypto_generichash(&output, outputSize, inputBytes, UInt64(input.count), keyBytes, keyBytes.count)
-		return Data(bytes: output)
+		return Data(output)
 	}
 	
 	public static func createPasswordHash(_ password: String) -> String? {

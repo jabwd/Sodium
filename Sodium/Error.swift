@@ -8,6 +8,8 @@
 public enum SodiumError: Error {
 	case invalidPublicKey
 	case invalidSecretKey
+
+	case invalidSignature
 	
 	case invalidBoxCipherText
 	case boxDecryptionFailed
