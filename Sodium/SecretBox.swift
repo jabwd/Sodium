@@ -8,9 +8,9 @@
 import Foundation
 
 public class SecretBox {
-	public static let keySize:   Int = Int(crypto_secretbox_KEYBYTES)
+	public static let keySize: Int = Int(crypto_secretbox_KEYBYTES)
 	public static let nonceSize: Int = Int(crypto_secretbox_NONCEBYTES)
-	public static let macSize:   Int = Int(crypto_secretbox_MACBYTES)
+	public static let macSize: Int = Int(crypto_secretbox_MACBYTES)
 
 	public let key: [UInt8]
 
@@ -33,10 +33,10 @@ public class SecretBox {
 	/// - Parameter bytes: The bytebuffer to encrypt
 	/// - Returns: A byte buffer with the nonce prepended to the ciphertext
 	public func encrypt(bytes: [UInt8]) -> [UInt8] {
-		let nonce:      [UInt8] = Data.randomBytes(SecretBox.nonceSize)
+		let nonce: [UInt8] = Data.randomBytes(SecretBox.nonceSize)
 		var cipherText: [UInt8] = [UInt8](repeating: 0, count: (SecretBox.macSize+bytes.count))
 		crypto_secretbox_easy(&cipherText, bytes, UInt64(bytes.count), nonce, key)
-		
+
 		// The payload is simply [nonce][cipherText], implementations have to mirror this
 		// in order to successfully decrypt the payload
 		return nonce + cipherText
@@ -60,9 +60,9 @@ public class SecretBox {
 		}
 		return output
 	}
-	
+
 	public func encrypt(_ message: String) -> [UInt8] {
-		let nonce:      [UInt8] = Data.randomBytes(SecretBox.nonceSize)
+		let nonce: [UInt8] = Data.randomBytes(SecretBox.nonceSize)
 		var cipherText: [UInt8] = [UInt8](repeating: 0, count: (SecretBox.macSize+message.count))
 		crypto_secretbox_easy(&cipherText, message, UInt64(message.count), nonce, key)
 		return nonce + cipherText

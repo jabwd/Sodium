@@ -10,7 +10,7 @@ public enum SodiumError: Error {
 	case invalidSecretKey
 
 	case invalidSignature
-	
+
 	case invalidBoxCipherText
 	case boxDecryptionFailed
 	case boxEncryptionFailed

@@ -402,6 +402,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 361797FD1F45B1D700F23298 /* Build configuration list for PBXNativeTarget "Sodium" */;
 			buildPhases = (
+				2B74364222CA024D00B02765 /* ShellScript */,
 				361797F21F45B1D700F23298 /* Sources */,
 				361797F31F45B1D700F23298 /* Frameworks */,
 				361797F41F45B1D700F23298 /* Headers */,
@@ -492,6 +493,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2B74364222CA024D00B02765 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		361797F21F45B1D700F23298 /* Sources */ = {

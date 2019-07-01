@@ -13,11 +13,11 @@ public extension Data {
 			[UInt8](ptr)
 		}
 	}
-	
+
 	static func random(_ size: Int) -> Data {
 		return Data(randomBytes(size))
 	}
-	
+
 	static func randomBytes(_ size: Int) -> [UInt8] {
 		// This can technically be replaced with SecRandom, but I wanted to reduce
 		// the amount of frameworks this code relies on. 

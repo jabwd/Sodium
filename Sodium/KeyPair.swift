@@ -10,10 +10,10 @@ import Foundation
 public struct KeyPair {
 	public static let publicKeySize: Int = Int(crypto_box_PUBLICKEYBYTES)
 	public static let secretKeySize: Int = Int(crypto_box_SECRETKEYBYTES)
-	
+
 	public let publicKey: [UInt8]
 	public let secretKey: [UInt8]
-	
+
 	init?(_ publicKey: [UInt8], secretKey: [UInt8]) {
 		guard publicKey.count == KeyPair.publicKeySize,
 			secretKey.count == KeyPair.secretKeySize else {
@@ -22,7 +22,7 @@ public struct KeyPair {
 		self.publicKey = publicKey
 		self.secretKey = secretKey
 	}
-	
+
 	init() {
 		var pub = [UInt8](repeating: 0, count: KeyPair.publicKeySize)
 		var sec = [UInt8](repeating: 0, count: KeyPair.secretKeySize)
@@ -38,7 +38,7 @@ public struct SigningKeyPair {
 	public static let publicKeySize: Int = Int(crypto_sign_PUBLICKEYBYTES)
 	public static let secretKeySize: Int = Int(crypto_sign_SECRETKEYBYTES)
 	public static let signatureSize: Int = Int(crypto_sign_BYTES)
-	
+
 	public let secretKey: [UInt8]
 	public let publicKey: [UInt8]
 
